@@ -1,9 +1,9 @@
 #import matplotlib
 #matplotlib.use('Agg')
 import numpy as np
-from silc.foregrounds import fgNoises
-import silc.ilc as ilc
-import silc.cosmology as cos
+from SILC.foregrounds import fgNoises
+import SILC.ilc as ilc
+import SILC.cosmology as cos
 import sys,os
 from configparser import SafeConfigParser 
 import pickle as pickle
