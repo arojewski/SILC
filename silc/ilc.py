@@ -2,13 +2,13 @@ from builtins import str
 from builtins import range
 from builtins import object
 import numpy as np
-from silc.foregrounds import fgNoises
+from SILC.foregrounds import fgNoises
 from scipy.interpolate import interp1d
-#from silc.cosmology import Cosmology
-import silc.cosmology as cosmo
+#from SILC.cosmology import Cosmology
+import SILC.cosmology as cosmo
 from orphics.cosmology import noise_func
 from orphics.cosmology import LensForecast
-from silc.foregrounds import f_nu
+from SILC.foregrounds import f_nu
 
 import sys,os
 from configparser import SafeConfigParser 
@@ -75,8 +75,8 @@ class ILC_simple:
 
         if v3mode>-1:
             print("V3 flag enabled.")
-            #import silc.so_noise_lat_v3_1_CAND as v3_1
-            import silc.SO_Noise_Calculator_Public_v3_1_1 as v3_1
+            #import SILC.so_noise_lat_v3_1_CAND as v3_1
+            import SILC.SO_Noise_Calculator_Public_v3_1_1 as v3_1
             
             if v3mode==0:
                 mode = 'threshold'
@@ -109,7 +109,7 @@ class ILC_simple:
                 Map_white_noise_levels = lat.get_white_noise(fsky)**.5
 
             elif v3mode == 3:
-                import silc.V3_calc_public as v3
+                import SILC.V3_calc_public as v3
                 vfreqs = v3.AdvACT_bands()
                 freq = vfreqs
                 vbeams = v3.AdvACT_beams()
@@ -121,7 +121,7 @@ class ILC_simple:
 
                 
             elif v3mode == 5:
-                import  silc.ccat_noise_200831 as ccatp #silc.lat_noise_190819_w350ds4 as ccatp
+                import  SILC.ccat_noise_200831 as ccatp #SILC.lat_noise_190819_w350ds4 as ccatp
                 lat = ccatp.CcatLatv2b(v3mode,el=50.,survey_years=4000/24./365.24,survey_efficiency=1.0)#,fun=fun)
                 vfreqs = lat.get_bands()
                 print("CCATP + SO goal")
@@ -143,7 +143,7 @@ class ILC_simple:
                 print(Map_white_noise_levels)
                 '''
             elif v3mode == 5:
-                import  silc.ccat_noise_200414 as ccatp #silc.lat_noise_190819_w350ds4 as ccatp
+                import  SILC.ccat_noise_200414 as ccatp #SILC.lat_noise_190819_w350ds4 as ccatp
                 lat = ccatp.CcatLatv2b(v3mode,el=50.,survey_years=4000/24./365.24,survey_efficiency=1.0)
                 vfreqs = lat.get_bands()
                 print("CCATP")
@@ -358,8 +358,8 @@ class ILC_simple:
                 #Add Planck
                 freq = np.append(freq,freqs1)
             elif add=='C':
-                import silc.SO_Noise_Calculator_Public_v3_1_1 as v3_1
-                import  silc.ccat_noise_200414 as ccatp #silc.lat_noise_190819_w350ds4 as ccatp
+                import SILC.SO_Noise_Calculator_Public_v3_1_1 as v3_1
+                import  SILC.ccat_noise_200414 as ccatp #SILC.lat_noise_190819_w350ds4 as ccatp
                 mode = 'baseline'
                 
 
@@ -382,8 +382,8 @@ class ILC_simple:
                 N_ell_T_LA_C = np.diagonal(N_ell_T_LA_full_C).T
         elif v3mode==-1:
             if add=='C+SAT':
-                import silc.SO_Noise_Calculator_Public_v3_1_1 as v3_1
-                import  silc.ccat_noise_200414 as ccatp #silc.lat_noise_190819_w350ds4 as ccatp
+                import SILC.SO_Noise_Calculator_Public_v3_1_1 as v3_1
+                import  SILC.ccat_noise_200414 as ccatp #SILC.lat_noise_190819_w350ds4 as ccatp
                 mode = 'baseline'
                 sat = v3_1.SOSatV3point1(mode,survey_years=5.,survey_efficiency=0.2*0.85)#,el=50.) #SO BASELINE
                 vfreqs2 = sat.get_bands()
@@ -419,7 +419,7 @@ class ILC_simple:
                 #Map_white_noise_levels = lat.get_white_noise(fsky=0.4)**.5
                 
             elif add=='SO':
-                import silc.SO_Noise_Calculator_Public_v3_1_1 as v3_1
+                import SILC.SO_Noise_Calculator_Public_v3_1_1 as v3_1
                 #Add SO
                 mode = 'baseline'
                 lat2 = v3_1.SOLatV3point1(mode,survey_years=5.,survey_efficiency=0.2*0.85) #SO BASELINE
